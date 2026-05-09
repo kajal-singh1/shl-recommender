@@ -1,5 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from app.config import settings
+from app.schemas import ChatRequest, ChatResponse
+from app.pipeline import run_pipeline
 
 app = FastAPI(
     title="SHL Assessment Recommender",
@@ -15,12 +17,17 @@ def health():
         "embedding_model": settings.embedding_model
     }
 
-# Add this temporary test route to app/main.py
-@app.get("/test-pipeline")
-def test_pipeline():
-    from app.pipeline import run_pipeline
-    result = run_pipeline(
-        message="I need an assessment for a sales manager role",
-        conversation_history=[]
-    )
-    return result
+@app.post("/chat", response_model=ChatResponse)
+def chat(request: ChatRequest):
+    try:
+        history = [
+            {"role": turn.role, "content": turn.content}
+            for turn in request.conversation_history
+        ]
+        result = run_pipeline(
+            message=request.message,
+            conversation_history=history
+        )
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
