@@ -3,10 +3,10 @@
 A conversational RAG-based API that recommends SHL assessments for hiring needs.
 
 ## Live API
-- **Base URL:** https://your-url.onrender.com
-- **Health:** GET /health
-- **Chat:** POST /chat
-- **Docs:** GET /docs
+- **Base URL:** https://shl-recommender-gc6y.onrender.com
+- **Health:** GET /health https://shl-recommender-gc6y.onrender.com/health
+- **Chat:** POST /chat  https://shl-recommender-gc6y.onrender.com/chat (POST)
+- **Docs:** GET /docs  https://shl-recommender-gc6y.onrender.com/docs
 
 ## Architecture
 - **FastAPI** — stateless REST API
@@ -17,7 +17,7 @@ A conversational RAG-based API that recommends SHL assessments for hiring needs.
 
 ## Quick Start
 ```bash
-git clone https://github.com/YOUR_USERNAME/shl-recommender
+git clone https://github.com/kajal-singh1/shl-recommender
 cd shl-recommender
 python -m venv venv
 venv\Scripts\activate
@@ -28,7 +28,7 @@ uvicorn app.main:app --reload
 
 ## API Usage
 ```bash
-curl -X POST "https://your-url.onrender.com/chat" \
+curl -X POST "https://shl-recommender-gc6y.onrender.com/chat" \
   -H "Content-Type: application/json" \
   -d '{
     "message": "I need an assessment for a sales manager role",
