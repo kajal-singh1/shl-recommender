@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: shl-recommender
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: MODEL_NAME
+        value: llama-3.1-8b-instant
+      - key: EMBEDDING_MODEL
+        value: all-MiniLM-L6-v2
+      - key: FAISS_INDEX_PATH
+        value: indexes/faiss.index
+      - key: METADATA_PATH
+        value: indexes/metadata.json
+      - key: TOP_K
+        value: "10"
