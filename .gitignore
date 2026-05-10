@@ -4,8 +4,7 @@ venv/
 # Environment variables (never commit API keys)
 .env
 
-# FAISS index (large binary, rebuild on deploy)
-indexes/
+# indexes/ kept in repo for deployment
 
 # Python cache
 __pycache__/
